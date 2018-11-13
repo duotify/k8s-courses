@@ -1,3 +1,16 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: nginx-ds
+spec:
+  selector:
+    app: nginx-ds
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: 80
+  type: ClusterIP
+---
 apiVersion: apps/v1
 kind: DaemonSet
 metadata:
