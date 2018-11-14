@@ -1,0 +1,17 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: counting
+spec:
+  template:
+    spec:
+      containers:
+      - name: alpine
+        image: alpine
+        command:
+        - /bin/sh
+        - -c
+        - --
+        args:
+        - for i in $(seq 1 10); do echo $i; sleep 1; done;
+      restartPolicy: Never
