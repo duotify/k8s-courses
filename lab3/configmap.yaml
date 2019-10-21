@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: data
+data:
+  test: |
+    this.that=false
+    this.this=true
+    that.that=true
+    that.this=false

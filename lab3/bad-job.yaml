@@ -1,0 +1,16 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: bad-counting
+spec:
+  template:
+    spec:
+      containers:
+      - name: alpine
+        image: alpine
+        args:
+        - /bin/sh
+        - -c 
+        - for i in $(seq 1 10); do echo $((1 + RANDOM % 10)); sleep 1; done; echo "Counting failed"; exit 1
+      restartPolicy: Never
+  backoffLimit: 4

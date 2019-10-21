@@ -1,0 +1,21 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: alpine-data-file
+  labels:
+    app: alpine-data-file
+spec:
+  containers:
+  - name: alpine
+    image: alpine
+    args:
+    - /bin/sh
+    - -c
+    - sleep 7d
+    volumeMounts:
+    - name: cm-data
+      mountPath: /var/data
+  volumes:
+  - name: cm-data
+    configMap:
+      name: data-file
