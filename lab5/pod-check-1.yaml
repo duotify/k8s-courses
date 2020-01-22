@@ -30,7 +30,7 @@ spec:
         effect: NoSchedule
       containers:
       - name: nginx
-        image: nginx
+        image: nginx:l.l6
         volumeMounts:
         - name: usrsharenginxhtml
           mountPath: /usr/share/nginx/html
