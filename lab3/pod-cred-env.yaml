@@ -1,0 +1,25 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: alpine-cred-env
+  labels:
+    app: alpine-cred-env
+spec:
+  containers:
+  - name: alpine
+    image: alpine
+    args:
+    - /bin/sh
+    - -c
+    - sleep infinity
+    env:
+      - name: USER
+        valueFrom:
+          secretKeyRef:
+            name: credentials
+            key: username
+      - name: PASS
+        valueFrom:
+          secretKeyRef:
+            name: credentials
+            key: password

@@ -28,4 +28,4 @@ spec:
         args:
         - /bin/sh
         - -c
-        - while true; do echo The pod $(POD_NAME) is on node $(NODE_NAME); sleep 10m; done
+        - while true; do echo The pod $(POD_NAME) is on node $(NODE_NAME); sleep infinity; done

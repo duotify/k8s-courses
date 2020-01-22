@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: pod-privaterepo
+  labels:
+    app: pod-privaterepo
+spec:
+  containers:
+  - name: alpine-bash
+    image: oneoneonepig/alpine-bash
+    command:
+    - /bin/bash
+    args:
+    - -c
+    - sleep infinity
+  imagePullSecrets:
+  - name: myrepokey
