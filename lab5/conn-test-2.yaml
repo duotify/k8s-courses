@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: conn-test-2
+  labels:
+    app: conn-test-2
+spec:
+  containers:
+  - name: bash
+    image: bash
+    args:
+    - /bin/sh
+    - -c
+    - sleep infinity
