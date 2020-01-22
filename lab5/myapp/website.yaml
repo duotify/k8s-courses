@@ -1,29 +1,44 @@
 apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: nginx-homepage
+data:
+  index.html: "<!DOCTYPE html>\n<html>\n<body>\n\n<h2>An Unordered HTML List</h2>\n\n<ul>\n
+    \ <li>Coffee</li>\n  <li>Tea</li>\n  <li>Milk</li>\n</ul>  \n\n<h2>An Ordered
+    HTML List</h2>\n\n<ol>\n  <li>Coffee</li>\n  <li>Tea</li>\n  <li>Milk</li>\n</ol>
+    \n\n</body>\n</html>\n"
+---
+apiVersion: v1
 kind: Service
 metadata:
-  name: nginx-static-homepage
+  name: website
+  labels:
+    owner: john
 spec:
   selector:
-    app: nginx-static-homepage
+    app: website
+    platform: linux
   ports:
     - protocol: TCP
       port: 80
       targetPort: 80
 ---
 apiVersion: apps/v1
-kind: DaemonSet
+kind: Deployment
 metadata:
-  name: nginx-static-homepage
+  name: website
   labels:
-    app: nginx-static-homepage
+    app: website
 spec:
   selector:
     matchLabels:
-      app: nginx-static-homepage
+      app: website
+      platform: linux
   template:
     metadata:
       labels:
-        app: nginx-static-homepage
+        app: website
+        platform: linux
     spec:
       tolerations:
       - key: node-role.kubernetes.io/master
