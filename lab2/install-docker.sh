@@ -26,7 +26,10 @@ apt-get update
 apt-get install -y docker-ce docker-ce-cli containerd.io
 
 apt-mark hold docker-ce docker-ce-cli containerd.io
-usermod -aG docker $USER
+
+if [[ ! -z $SUDO_USER ]]; then
+  usermod -aG docker $SUDO_USER
+fi
 
 tee /etc/docker/daemon.json << EOF >/dev/null
 {
