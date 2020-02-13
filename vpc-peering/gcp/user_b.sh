@@ -23,7 +23,7 @@ gcloud compute networks subnets create k8snet-asiaeast1 \
 
 gcloud compute firewall-rules create k8snet-allow-common \
 --network k8snet \
---allow icmp,tcp:22,tcp:30000-32767
+--allow icmp,tcp:22,tcp:6443,tcp:30000-32767
 
 gcloud compute firewall-rules create k8snet-allow-internal \
 --network k8snet \
