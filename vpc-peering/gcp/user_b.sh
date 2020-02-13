@@ -1,3 +1,15 @@
+#!/bin/bash
+
+if [[ -z $MY_PROJECT_ID ]]; then
+  echo "project id not set"
+  exit 1
+fi
+
+if [[ -z $PEER_PROJECT_ID ]]; then
+  echo "project id not set"
+  exit 1
+fi
+
 gcloud config set project $MY_PROJECT_ID
 gcloud config set compute/region asia-east1
 gcloud config set compute/zone asia-east1-b
