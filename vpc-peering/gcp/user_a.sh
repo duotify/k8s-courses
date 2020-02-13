@@ -1,0 +1,35 @@
+gcloud config set project $MY_PROJECT_ID
+gcloud config set compute/region asia-east1
+gcloud config set compute/zone asia-east1-b
+
+gcloud compute networks create k8snet \
+--subnet-mode custom
+
+gcloud compute networks subnets create k8snet-asiaeast1 \
+--network k8snet \
+--range 10.0.1.0/24
+
+gcloud compute firewall-rules create k8snet-allow-common \
+--network k8snet \
+--allow icmp,tcp:22,tcp:30000-32767
+
+gcloud compute firewall-rules create k8snet-allow-internal \
+--network k8snet \
+--allow tcp,udp \
+--source-ranges 10.0.1.0/24,10.0.2.0/24
+
+gcloud compute instances create k8s-node01 \
+--zone=asia-east1-b \
+--machine-type=n1-standard-2 \
+--subnet=k8snet-asiaeast1 \
+--image=ubuntu-1804-bionic-v20200129a \
+--image-project=ubuntu-os-cloud \
+--boot-disk-size=30GB \
+--boot-disk-type=pd-standard \
+--boot-disk-device-name=k8s-node01
+
+gcloud compute networks peerings create peer-to-node02 \
+--network k8snet \
+--peer-project $PEER_PROJECT_ID \
+--peer-network k8snet \
+--auto-create-routes
