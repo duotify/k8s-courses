@@ -27,12 +27,12 @@ gcloud compute firewall-rules create k8snet-allow-common \
 
 gcloud compute firewall-rules create k8snet-allow-k8s-internal \
 --network k8snet \
---allow tcp,udp \
+--allow all \
 --source-ranges 172.30.0.0/16,10.96.0.0/12
 
 gcloud compute firewall-rules create k8snet-allow-internal \
 --network k8snet \
---allow tcp,udp \
+--allow all \
 --source-ranges 10.0.1.0/24,10.0.2.0/24
 
 gcloud compute instances create k8s-node01 \
