@@ -13,5 +13,6 @@ gcloud compute instances delete k8s-node02 -q
 gcloud compute networks peerings delete peer-to-node01 --network k8snet -q
 gcloud compute firewall-rules delete k8snet-allow-common -q
 gcloud compute firewall-rules delete k8snet-allow-internal -q
+gcloud compute firewall-rules delete k8snet-allow-k8s-internal -q
 gcloud compute networks subnets delete k8snet-asiaeast1 -q
 gcloud compute networks delete k8snet -q

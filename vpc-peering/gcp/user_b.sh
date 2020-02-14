@@ -25,6 +25,11 @@ gcloud compute firewall-rules create k8snet-allow-common \
 --network k8snet \
 --allow icmp,tcp:22,tcp:6443,tcp:30000-32767
 
+gcloud compute firewall-rules create k8snet-allow-k8s-internal \
+--network k8snet \
+--allow tcp,udp \
+--source-ranges 172.30.0.0/16,10.96.0.0/12
+
 gcloud compute firewall-rules create k8snet-allow-internal \
 --network k8snet \
 --allow tcp,udp \
@@ -38,7 +43,8 @@ gcloud compute instances create k8s-node02 \
 --image-project=ubuntu-os-cloud \
 --boot-disk-size=30GB \
 --boot-disk-type=pd-standard \
---boot-disk-device-name=k8s-node01
+--boot-disk-device-name=k8s-node01 \
+--can-ip-forward
 
 gcloud compute networks peerings create peer-to-node01 \
 --network k8snet \
