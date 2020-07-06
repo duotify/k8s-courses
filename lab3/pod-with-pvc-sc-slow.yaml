@@ -1,0 +1,28 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: mypvc-slow
+spec:
+  accessModes:
+    - ReadWriteOnce
+  volumeMode: Filesystem
+  resources:
+    requests:
+      storage: 4Gi
+  storageClassName: slow
+---
+apiVersion: v1
+kind: Pod
+metadata:
+    name: pod-with-pvc-sc-slow
+spec:
+  containers:
+    - name: nginx
+      image: nginx
+      volumeMounts:
+      - mountPath: "/tmp"
+        name: tmp
+  volumes:
+    - name: tmp
+      persistentVolumeClaim:
+        claimName: mypvc-slow

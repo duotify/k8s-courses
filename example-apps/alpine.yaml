@@ -11,4 +11,4 @@ spec:
     args:
     - /bin/sh
     - -c
-    - sleep 7d
+    - sleep infinity
