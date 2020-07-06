@@ -62,6 +62,16 @@ spec:
         volumeMounts:
         - name: mysql-pvc
           mountPath: /var/lib/mysql
+        livenessProbe:
+          exec:
+            command: ["mysqladmin", "ping"]
+        readinessProbe:
+          exec:
+            command: 
+            - /bin/sh
+            - -c
+            - |
+              mysql -h 127.0.0.1 -u root -p${MYSQL_ROOT_PASSWORD} -e 'SHOW DATABASES'
       volumes:
       - name: mysql-pvc
         persistentVolumeClaim:
