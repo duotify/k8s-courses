@@ -6,12 +6,7 @@ metadata:
     app: pod-privaterepo
 spec:
   containers:
-  - name: alpine-bash
-    image: oneoneonepig/alpine-bash
-    command:
-    - /bin/bash
-    args:
-    - -c
-    - sleep infinity
+  - name: nginx
+    image: ACCOUNT_NAME/nginx
   imagePullSecrets:
   - name: myrepokey

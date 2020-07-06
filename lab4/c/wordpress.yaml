@@ -68,7 +68,7 @@ spec:
             port: 80
         readinessProbe:
           httpGet:
-            path: /fake
+            path: /wp-login.php
             port: 80
       volumes:
       - name: wp-pvc

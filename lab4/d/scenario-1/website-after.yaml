@@ -1,0 +1,58 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: nginx-homepage
+data:
+  index.html: "<!DOCTYPE html>\n<html>\n<body>\n\n<h2>An Unordered HTML List</h2>\n\n<ul>\n
+    \ <li>Coffee</li>\n  <li>Tea</li>\n  <li>Milk</li>\n</ul>  \n\n<h2>An Ordered
+    HTML List</h2>\n\n<ol>\n  <li>Coffee</li>\n  <li>Tea</li>\n  <li>Milk</li>\n</ol>
+    \n\n</body>\n</html>\n"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: website
+  labels:
+    owner: john
+spec:
+  selector:
+    app: website
+    platform: linux
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 80
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: website
+  labels:
+    app: website
+spec:
+  replicas: 8
+  selector:
+    matchLabels:
+      app: website
+      platform: linux
+  template:
+    metadata:
+      labels:
+        app: website
+        platform: linux
+    spec:
+      tolerations:
+      - key: node-role.kubernetes.io/master
+        effect: NoSchedule
+      containers:
+      - name: nginx
+        image: oneoneonepig/nginx:1.16
+        volumeMounts:
+        - name: usrsharenginxhtml
+          mountPath: /usr/share/nginx/html
+          readOnly: true
+      volumes:
+      - name: usrsharenginxhtml
+        configMap:
+          name: nginx-homepage
+
