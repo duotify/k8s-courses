@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ .Release.Name }}-range
+data:
+  menu: |-
+    {{- range .Values.menu }}
+    - {{ . | title | quote }}
+    {{- end }}
+  sizes: |-
+    {{- range tuple "small" "medium" "large" }}
+    - {{ . | title | quote }}
+    {{- end }}

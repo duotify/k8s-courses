@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ .Release.Name }}-variables
+data:
+  {{- $relName := .Release.Name }}
+  release: {{ $relName }}
+  {{- range $key, $val := .Values.favorite }}
+  {{ $key }}: {{ $val }}
+  {{- end }}

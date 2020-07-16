@@ -1,0 +1,20 @@
+pre:
+  name: sleep
+  image: alpine
+  imageTag: latest
+
+deployment:
+  name: nginx
+  image: nginx
+  imageTag: 1.19.1-alpine
+
+test:
+  name: connection-test
+  image: busybox
+  imageTag: latest
+
+service:
+  type: NodePort
+  port: 80
+  nodePorts:
+    http: 30000

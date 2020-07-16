@@ -1,0 +1,18 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Release.Name }}
+  namespace: {{ .Release.Namespace }}
+  labels: {{- include "deployment.labels" . | nindent 4 }}
+spec:
+  selector:
+    matchLabels: {{- include "deployment.labels" . | nindent 6 }}
+  template:
+    metadata:
+      labels: {{- include "deployment.labels" . | nindent 8 }}
+    spec:
+      containers:
+      {{- with .Values.deployment }}
+      - name: {{ .name }}
+        image: "{{ .image }}:{{ .imageTag }}"
+      {{- end }}

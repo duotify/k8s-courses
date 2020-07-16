@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ .Release.Name }}-ifelse
+data:
+  {{ if eq .Values.phase "prod" }}title: "Official Site"
+  {{ else if eq .Values.phase "dev" }}title: "Development Site"
+  {{ else }}title: "Unknown Site - Phase not set"{{ end }}

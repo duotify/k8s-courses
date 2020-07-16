@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ .Release.Name }}-builtin-objects
+data:
+  release_name: "{{ .Release.Name }}"
+  release_namespace: "{{ .Release.Namespace }}"
+  release_isupgrade: "{{ .Release.IsUpgrade }}"
+  release_isinstall: "{{ .Release.IsInstall }}"
+  release_revision: "{{ .Release.Revision }}"
+  release_service: "{{ .Release.Service }}"
+  cap_kubeversion: "{{ .Capabilities.KubeVersion }}"
+  cap_kubeversion_major: "{{ .Capabilities.KubeVersion.Major }}"
+  cap_kubeversion_minor: "{{ .Capabilities.KubeVersion.Minor }}"
+  template_name: "{{ .Template.Name }}"
+  template_basepath: "{{ .Template.BasePath }}"

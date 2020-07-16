@@ -1,0 +1,7 @@
+apiVersion: v2
+name: alpine
+description: An alpine chart to test Helm hook
+type: application
+version: 3.12.0
+appVersion: 3.12.0
+kubeVersion: ">=1.16.0-0"
