@@ -1,0 +1,80 @@
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: nginx-v1
+  namespace: istio-test
+spec:
+  hosts:
+  - "nginx-v1.domain.com"
+  gateways:
+  - istio-system/gw-nginx
+  http:
+  - match:
+    - uri:
+        prefix: /
+    route:
+    - destination:
+        port:
+          number: 80
+        host: nginx-v1
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: nginx-v2
+  namespace: istio-test
+spec:
+  hosts:
+  - "nginx-v2.domain.com"
+  gateways:
+  - istio-system/gw-nginx
+  http:
+  - match:
+    - uri:
+        prefix: /
+    route:
+    - destination:
+        port:
+          number: 80
+        host: nginx-v2
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: nginx-v3
+  namespace: istio-test
+spec:
+  hosts:
+  - "nginx-v3.domain.com"
+  gateways:
+  - istio-system/gw-nginx
+  http:
+  - match:
+    - uri:
+        prefix: /
+    route:
+    - destination:
+        port:
+          number: 80
+        host: nginx-v3
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: nginx-all
+  namespace: istio-test
+spec:
+  hosts:
+  - "nginx.domain.com"
+  gateways:
+  - istio-system/gw-nginx-all
+  http:
+  - match:
+    - uri:
+        prefix: /
+    route:
+    - destination:
+        port:
+          number: 80
+        host: nginx

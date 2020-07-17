@@ -1,0 +1,12 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: DestinationRule
+metadata:
+  name: nginx
+  namespace: istio-test
+spec:
+  host: nginx
+  trafficPolicy:
+    loadBalancer:
+#      simple: RANDOM
+      consistentHash: 
+        useSourceIp: true
