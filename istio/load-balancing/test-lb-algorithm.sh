@@ -16,13 +16,15 @@ then
   echo
 else
   echo Please provide hostname in the argument.
-  echo Example: $0 nginx.domain.com
+  echo "  Example: $0 nginx.domain.com"
+  echo You can also provided query parameters after the website
+  echo "  Example: $0 nginx.domain.com a=1,b=2"
   exit 2
 fi
 
 # Test connection and display version
 while true
 do
-  curl -s -m 0.5 -H "Host: $1" http://$INGRESS_IP/labels.html | grep version
+  curl -s -m 0.5 -H "Host: $1" http://$INGRESS_IP/labels.html?$2 | grep version
   sleep 1
 done

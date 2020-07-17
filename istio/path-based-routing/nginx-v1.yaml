@@ -1,0 +1,60 @@
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: nginx-v1
+  namespace: istio-test
+spec:
+  selector:
+    app: nginx
+    version: v1
+  ports:
+  - protocol: TCP
+    name: http
+    port: 80
+    targetPort: 80
+  type: ClusterIP
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx-v1
+  namespace: istio-test
+  labels:
+    app: nginx
+    version: v1
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: nginx
+      version: v1
+  template:
+    metadata:
+      labels:
+        app: nginx
+        version: v1
+    spec:
+      containers:
+      - name: nginx
+        image: nginx:alpine
+        ports:
+        - containerPort: 80
+        volumeMounts:
+        - name: podname
+          mountPath: /usr/share/nginx/html/
+        - name: podlabels
+          mountPath: /usr/share/nginx/html/v1/
+      volumes:
+      - name: podlabels
+        downwardAPI:
+          items:
+          - path: "index.html"
+            fieldRef:
+              fieldPath: metadata.labels
+      - name: podname
+        downwardAPI:
+          items:
+          - path: "index.html"
+            fieldRef:
+              fieldPath: metadata.name

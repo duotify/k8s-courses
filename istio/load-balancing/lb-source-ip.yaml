@@ -7,6 +7,5 @@ spec:
   host: nginx
   trafficPolicy:
     loadBalancer:
-#      simple: RANDOM
       consistentHash: 
         useSourceIp: true
