@@ -1,12 +1,41 @@
-### Host-based routing
+## Host-based routing
 
 - nginx.domain.com -> All nginx Pods
 - nginx-v1.domain.com -> Pod nginx-v1
 - nginx-v2.domain.com -> Pod nginx-v2
 - nginx-v3.domain.com -> Pod nginx-v3
 
+### Physical Topology
+```
+                                     +---------------------------------------------------------+
+                                     |                                                         |
+                                     |                                                         |
+                                     |                                 + ------------------+   |
+                                     |                                 |                   |   |
+                                     |                      +---------->    Pod nginx v1   |   |
+                                     |                      |          |                   |   |
+       nginx->1.domain.com           |                      |          + ------------------+   |
+       nginx->2.domain.com           |                      |                                  |
+       nginx->3.domain.com           |   +--------------------+        + ------------------+   |
+          nginx.domain.com           |   |                    |        |                   |   |
+----------------------------------------->   IngressGateway   +-------->    Pod nginx v2   |   |
+                                     |   |                    |        |                   |   |
+                                     |   +--------------------+        + ------------------+   |
+                                     |                      |                                  |
+                                     |                      |          + ------------------+   |
+                                     |                      |          |                   |   |
+                                     |                      +---------->    Pod nginx v3   |   |
+                                     |                                 |                   |   |
+                                     |                                 + ------------------+   |
+                                     |                                                         |
+                                     |                                                         |
+                                     +---------------------------------------------------------+
+
+```
 
 
+
+### HTTP Routing
 ```
                                    +------------------+
        nginx-v1.domain.com         |                  |
@@ -26,4 +55,3 @@
                                    |                  |
                                    +------------------+
 ```
-
