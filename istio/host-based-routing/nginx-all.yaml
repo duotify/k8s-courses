@@ -3,7 +3,7 @@ kind: Service
 apiVersion: v1
 metadata:
   name: nginx
-  namespace: istio-test
+  namespace: istio-test-hbr
 spec:
   selector:
     app: nginx
