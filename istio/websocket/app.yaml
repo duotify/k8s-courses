@@ -2,6 +2,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: tornado
+  namespace: istio-test-ws
   labels:
     app: tornado
 spec:
@@ -15,6 +16,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: tornado
+  namespace: istio-test-ws
 spec:
   replicas: 1
   selector:

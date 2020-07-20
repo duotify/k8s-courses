@@ -1,0 +1,20 @@
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: nginx
+  namespace: istio-test-https
+spec:
+  hosts:
+  - "nginx.domain.com"
+  gateways:
+  - istio-system/gateway-https
+  http:
+  - match:
+    - uri:
+        prefix: /
+    route:
+    - destination:
+        port:
+          number: 80
+        host: nginx
