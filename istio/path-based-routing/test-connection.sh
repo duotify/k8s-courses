@@ -13,5 +13,4 @@ fi
 watch -n 2 "\
 echo '\n'; echo 'Connecting to nginx/v1'; curl -s -m 0.5 -H 'Host: nginx.domain.com' http://$INGRESS_IP/v1/; \
 echo '\n'; echo 'Connecting to nginx/v2'; curl -s -m 0.5 -H 'Host: nginx.domain.com' http://$INGRESS_IP/v2/; \
-echo '\n'; echo 'Connecting to nginx/v3'; curl -s -m 0.5 -H 'Host: nginx.domain.com' http://$INGRESS_IP/v3/; \
-echo '\n'; echo 'Connecting to nginx';    curl -s -m 0.5 -H 'Host: nginx.domain.com' http://$INGRESS_IP/"
+echo '\n'; echo 'Connecting to nginx/v3'; curl -s -m 0.5 -H 'Host: nginx.domain.com' http://$INGRESS_IP/v3/"

@@ -3,7 +3,7 @@ kind: Service
 apiVersion: v1
 metadata:
   name: nginx-v2
-  namespace: istio-test
+  namespace: istio-test-pbr
 spec:
   selector:
     app: nginx
@@ -19,7 +19,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: nginx-v2
-  namespace: istio-test
+  namespace: istio-test-pbr
   labels:
     app: nginx
     version: v2

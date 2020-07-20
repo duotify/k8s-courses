@@ -3,7 +3,7 @@ apiVersion: networking.istio.io/v1alpha3
 kind: VirtualService
 metadata:
   name: nginx-v1
-  namespace: istio-test
+  namespace: istio-test-pbr
 spec:
   hosts:
   - "nginx.domain.com"
@@ -23,7 +23,7 @@ apiVersion: networking.istio.io/v1alpha3
 kind: VirtualService
 metadata:
   name: nginx-v2
-  namespace: istio-test
+  namespace: istio-test-pbr
 spec:
   hosts:
   - "nginx.domain.com"
@@ -43,7 +43,7 @@ apiVersion: networking.istio.io/v1alpha3
 kind: VirtualService
 metadata:
   name: nginx-v3
-  namespace: istio-test
+  namespace: istio-test-pbr
 spec:
   hosts:
   - "nginx.domain.com"

@@ -1,9 +1,8 @@
-## Host-based routing
+## Path-based routing
 
-- nginx.domain.com -> All nginx Pods
-- nginx-v1.domain.com -> Pod nginx-v1
-- nginx-v2.domain.com -> Pod nginx-v2
-- nginx-v3.domain.com -> Pod nginx-v3
+- nginx.domain.com/v1/ -> Pod nginx-v1
+- nginx.domain.com/v2/ -> Pod nginx-v2
+- nginx.domain.com/v3/ -> Pod nginx-v3
 
 ### Physical Topology
 ```
@@ -14,10 +13,10 @@
                                      |                                 |                   |   |
                                      |                      +---------->    Pod nginx v1   |   |
                                      |                      |          |                   |   |
-       nginx-v1.domain.com           |                      |          + ------------------+   |
-       nginx-v2.domain.com           |                      |                                  |
-       nginx-v3.domain.com           |   +--------------------+        + ------------------+   |
-          nginx.domain.com           |   |                    |        |                   |   |
+       nginx.domain.com/v1/          |                      |          + ------------------+   |
+       nginx.domain.com/v2/          |                      |                                  |
+       nginx.domain.com/v3/          |   +--------------------+        + ------------------+   |
+                                     |   |                    |        |                   |   |
 ----------------------------------------->   IngressGateway   +-------->    Pod nginx v2   |   |
                                      |   |                    |        |                   |   |
                                      |   +--------------------+        + ------------------+   |
@@ -38,19 +37,19 @@
 ### HTTP Routing
 ```
                                    +------------------+
-       nginx-v1.domain.com         |                  |
+       nginx.domain.com/v1/        |                  |
  --------------------------------> |   Pod nginx v1   |  <------+
                                    |                  |         |
                                    +------------------+         |
                                                                 |
                                    +------------------+         |
-       nginx-v2.domain.com         |                  |         |       nginx.domain.com
- --------------------------------> |   Pod nginx v2   |  <----------------------------------+
+       nginx.domain.com/v2/        |                  |         |
+ --------------------------------> |   Pod nginx v2   |         |
                                    |                  |         |
                                    +------------------+         |
                                                                 |
                                    +------------------+         |
-       nginx-v3.domain.com         |                  |         |
+       nginx.domain.com/v3/        |                  |         |
  --------------------------------> |   Pod nginx v3   |  <------+
                                    |                  |
                                    +------------------+
