@@ -12,7 +12,7 @@ spec:
       name: http
       protocol: HTTP
     hosts:
-    - nginx.domain.com
+    - "nginx.domain.com"
     tls:
       httpsRedirect: true # sends 301 redirect for http requests
   - port:
@@ -20,7 +20,7 @@ spec:
       name: https
       protocol: HTTPS
     hosts:
-    - nginx.domain.com
+    - "nginx.domain.com"
     tls:
       mode: SIMPLE # enables HTTPS on this port
       credentialName: istio-gateway-certs
