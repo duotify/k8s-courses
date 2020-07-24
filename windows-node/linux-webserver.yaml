@@ -19,7 +19,7 @@ metadata:
     app: linux-webserver
   name: linux-webserver
 spec:
-  replicas: 1
+  replicas: 4
   selector:
     matchLabels:
       app: linux-webserver
