@@ -1,0 +1,15 @@
+apiVersion: node.k8s.io/v1beta1
+kind: RuntimeClass
+metadata:
+  name: master
+handler: 'docker'
+scheduling:
+  nodeSelector:
+    kubernetes.io/os: 'linux'
+    kubernetes.io/arch: 'amd64'
+    node-role.kubernetes.io/master: ''
+  tolerations:
+  - effect: NoSchedule
+    key: os
+    operator: Equal
+    value: "linux"

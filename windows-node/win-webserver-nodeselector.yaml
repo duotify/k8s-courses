@@ -6,8 +6,9 @@ metadata:
     app: win-webserver
 spec:
   ports:
-    - port: 80
-      targetPort: 80
+  - port: 80
+    targetPort: 80
+    nodePort: 30010
   selector:
     app: win-webserver
   type: NodePort
@@ -32,7 +33,7 @@ spec:
       nodeSelector:
         kubernetes.io/os: windows
       containers:
-      - name: windowswebserver
+      - name: web
         image: mcr.microsoft.com/windows/servercore:ltsc2019
         command:
         - powershell.exe

@@ -1,0 +1,69 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: docker-registry
+  namespace: kube-system
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: docker-registry
+  template:
+    metadata:
+      labels:
+        app: docker-registry
+    spec:
+      containers:
+      - name: registry 
+        image: registry:2
+        env:
+        - name: REGISTRY_HTTP_ADDR
+          value: 0.0.0.0:443
+        - name: REGISTRY_HTTP_TLS_CERTIFICATE
+          value: /tmp/certs/tls.crt
+        - name: REGISTRY_HTTP_TLS_KEY
+          value: /tmp/certs/tls.key
+        - name: REGISTRY_AUTH
+          value: htpasswd
+        - name: REGISTRY_AUTH_HTPASSWD_REALM
+          value: "Registry Realm"
+        - name: REGISTRY_AUTH_HTPASSWD_PATH
+          value: /tmp/auth/htpasswd
+#        - name: REGISTRY_LOG_LEVEL
+#          value: debug
+        livenessProbe:
+          httpGet:
+            path: /
+            scheme: HTTPS
+            port: 443
+        volumeMounts:
+        - name: certs
+          mountPath: "/tmp/certs"
+        - name: auth
+          mountPath: "/tmp/auth"
+      volumes:
+      - name: certs
+        secret:
+          secretName: registry-certs
+      - name: auth
+        secret:
+          secretName: registry-auth
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: docker-registry
+  namespace: kube-system
+  labels:
+    app: docker-registry
+spec:
+  selector:
+    app: docker-registry
+  ports:
+  - protocol: TCP
+    port: 443
+    targetPort: 443
+    nodePort: 30000
+  type: NodePort
+
