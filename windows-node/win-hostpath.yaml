@@ -1,0 +1,45 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: win-hostpath
+  labels:
+    app: win-hostpath
+spec:
+  ports:
+  - port: 80
+    targetPort: 80
+    nodePort: 30030
+  selector:
+    app: win-hostpath
+  type: NodePort
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: win-hostpath
+  name: win-hostpath
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: win-hostpath
+  template:
+    metadata:
+      labels:
+        app: win-hostpath
+      name: win-hostpath
+    spec:
+      runtimeClassName: windows-2019
+      containers:
+      - name: web
+        image: mcr.microsoft.com/windows/servercore/iis:windowsservercore-ltsc2019
+        volumeMounts:
+        - name: data
+          mountPath: "C:/win-test"
+      volumes:
+      - name: data
+        hostPath:
+          path: "C:/win-test"
+          type: DirectoryOrCreate
