@@ -10,6 +10,7 @@
 #    2. This script is compatible with Flannel cni
 #
 
+# Stop script when error occurs (exit code != 0)
 set -o errexit
 
 # -------------- Variables -------------- #
@@ -26,8 +27,6 @@ declare -r POD_CIDR=10.244.0.0/16
 declare -r CLUSTER_CIDR=10.96.0.0/12
 declare -r NODE_CIDR=
 
-CURRENT_SECTION=init
-
 # -------------- Start Script -------------- #
 
 ### Load helper functions ###
@@ -39,6 +38,8 @@ else
   echo "Error: helper function not found." >&2
   exit 1
 fi
+
+CURRENT_SECTION=init
 
 ### Check if the user is root ###
 
