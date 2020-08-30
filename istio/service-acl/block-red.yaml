@@ -1,0 +1,13 @@
+apiVersion: security.istio.io/v1beta1
+kind: AuthorizationPolicy
+metadata:
+  name: deny-red-stars
+  namespace: istio-test-acl
+spec:
+  selector:
+    matchLabels:
+      app: reviews
+      version: v3
+  action: DENY
+  rules:
+  - {}

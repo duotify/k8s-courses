@@ -1,0 +1,14 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: redis-ro
+  namespace: redis
+spec:
+  selector:
+    app.kubernetes.io/component: redis   
+    app.kubernetes.io/name: redisfailover
+  ports:
+  - protocol: TCP
+    port: 6379
+    targetPort: 6379
+  type: ClusterIP
