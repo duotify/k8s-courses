@@ -1,0 +1,144 @@
+# chat app v1
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: chat-v1
+  namespace: istio-test-ws-chat
+  labels:
+    app: chat
+    version: v1
+spec:
+  ports:
+  - port: 8080
+    name: http
+  selector:
+    app: chat
+    version: v1
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: chat-v1
+  namespace: istio-test-ws-chat
+  labels:
+    app: chat
+    version: v1
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: chat
+      version: v1
+  template:
+    metadata:
+      labels:
+        app: chat
+        version: v1
+    spec:
+      containers:
+      - name: chat
+        image: oneoneonepig/ws-chat
+        imagePullPolicy: Always
+        args:
+        - -root=/v1/
+        ports:
+        - containerPort: 8080
+---
+
+# chat app v2
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: chat-v2
+  namespace: istio-test-ws-chat
+  labels:
+    app: chat
+    version: v2
+spec:
+  ports:
+  - port: 8080
+    name: http
+  selector:
+    app: chat
+    version: v2
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: chat-v2
+  namespace: istio-test-ws-chat
+  labels:
+    app: chat
+    version: v2
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: chat
+      version: v2
+  template:
+    metadata:
+      labels:
+        app: chat
+        version: v2
+    spec:
+      containers:
+      - name: chat
+        image: oneoneonepig/ws-chat
+        imagePullPolicy: Always
+        args:
+        - -root=/v2/
+        ports:
+        - containerPort: 8080
+---
+
+# chat app v3
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: chat-v3
+  namespace: istio-test-ws-chat
+  labels:
+    app: chat
+    version: v3
+spec:
+  ports:
+  - port: 8080
+    name: http
+  selector:
+    app: chat
+    version: v3
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: chat-v3
+  namespace: istio-test-ws-chat
+  labels:
+    app: chat
+    version: v3
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: chat
+      version: v3
+  template:
+    metadata:
+      labels:
+        app: chat
+        version: v3
+    spec:
+      containers:
+      - name: chat
+        image: oneoneonepig/ws-chat
+        imagePullPolicy: Always
+        args:
+        - -root=/v3/
+        ports:
+        - containerPort: 8080
+---

@@ -1,0 +1,42 @@
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: chat
+  namespace: istio-test-ws-chat
+spec:
+  hosts:
+  - "*"
+  gateways:
+  - istio-system/gw-chat
+  http:
+  - match:
+    - uri:
+        prefix: /v1
+    - uri:
+        prefix: /v1/ws
+    route:
+    - destination:
+        port:
+          number: 8080
+        host: chat-v1
+  - match:
+    - uri:
+        prefix: /v2
+    - uri:
+        prefix: /v2/ws
+    route:
+    - destination:
+        port:
+          number: 8080
+        host: chat-v2
+  - match:
+    - uri:
+        prefix: /v3
+    - uri:
+        prefix: /v3/ws
+    route:
+    - destination:
+        port:
+          number: 8080
+        host: chat-v3
