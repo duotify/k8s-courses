@@ -203,7 +203,7 @@ function check_current() {
         exit $error_code
     fi
     
-    $say Updated at $(date)
+    $say Updated at $(TZ="Asia/Taipei" date)
 }
 
 # Compare current util and target util, increase counter value
