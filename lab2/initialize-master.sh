@@ -24,10 +24,7 @@ else
 fi
 
 # Option 1 - Calico (IPIP)
-
-curl -s https://docs.projectcalico.org/v3.8/manifests/calico.yaml -o $BASE_DIR/calico.yaml
-sed -i "s/192.168.0.0/$POD_CIDR/g" $BASE_DIR/calico.yaml
-kubectl apply -f $BASE_DIR/calico.yaml
+kubectl apply -f https://docs.projectcalico.org/manifests/calico.yaml
 
 # Option 2 - WeaveNet (VXLAN)
 
