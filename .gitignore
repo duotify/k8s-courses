@@ -1,2 +1,5 @@
 **/calico.yaml
 **/kubeadm_init.log
+
+bin/
+obj/
