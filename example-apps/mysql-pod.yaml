@@ -6,8 +6,8 @@ metadata:
     app: mysql
 spec:
   containers:
-  - name: mysql
-    image: mysql
-    env:
-    - name: MYSQL_ROOT_PASSWORD
-      value: "P@ssw0rd"
+    - name: mysql
+      image: mysql
+      env:
+        - name: MYSQL_ROOT_PASSWORD
+          value: 'P@ssw0rd'

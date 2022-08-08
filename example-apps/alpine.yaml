@@ -6,9 +6,9 @@ metadata:
     app: alpine
 spec:
   containers:
-  - name: alpine
-    image: alpine
-    args:
-    - /bin/sh
-    - -c
-    - sleep infinity
+    - name: alpine
+      image: alpine
+      args:
+        - /bin/sh
+        - -c
+        - sleep infinity

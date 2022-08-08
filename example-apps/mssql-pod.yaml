@@ -1,0 +1,31 @@
+# https://kubernetes.io/docs/concepts/workloads/pods/
+apiVersion: v1
+kind: Pod
+metadata:
+  name: mssql
+  namespace: default
+  labels:
+    app: mssql
+spec:
+  containers:
+    - name: mssql
+      image: mcr.microsoft.com/mssql/server:2019-latest
+      resources:
+        limits:
+          cpu: 1000m
+          memory: 5000Mi
+        requests:
+          cpu: 1000m
+          memory: 2000Mi
+      env:
+        - name: ACCEPT_EULA
+          value: "Y"
+        - name: MSSQL_SA_PASSWORD
+          value: "P@ssw0rd"
+      ports:
+        - containerPort: 1433
+          name: sqlserver
+  restartPolicy: Always
+---
+# kubectl apply -f https://github.com/kubernetes-sigs/metrics-server/releases/latest/download/components.yaml
+
